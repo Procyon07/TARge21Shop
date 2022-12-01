@@ -28,5 +28,11 @@ namespace TARge21Shop.Controllers
 
             return View(result);
         }
+        public IActionResult Add()
+        {
+
+
+            return View("Edit");
+        }
     }
 }
