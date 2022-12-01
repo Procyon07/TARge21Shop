@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TARge21Shop.Models.Spaceship.SpaceshipIndexViewModel>
+
+<div class="h1">
+    Products
+</div>
+
+<div>
+    <a asp-action="add" asp-controller="spaceships" type="submit" class="btn btn-outline-primary">Add</a>
+</div>
+@{
+    int rowNr = 1;
+}
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">nr</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Passengers</th>
+                <th scope="col">EnginePower</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var spaceship in Model)
+            {
+                <tr>
+                    <td>@rowNr</td>
+                    <td>@spaceship.Name</td>
+                    <td>@spaceship.Type</td>
+                    <td>@spaceship.Passengers</td>
+                    <td>@spaceship.EnginePower</td>
+                    <td>
+                        <a asp-action="edit" asp-controller="spaceship" asp-route-id="@spaceship.Id" class="btn btn-primary">Edit</a>
+                        <input asp-action="delete" asp-controller="spaceship" asp-route-id="@spaceship.Id" type="submit" class="btn btn-danger" value="Delete">
+                    </td>
+                </tr>
+                rowNr++;                
+            }            
+        </tbody>
+    </table>
+</form>
