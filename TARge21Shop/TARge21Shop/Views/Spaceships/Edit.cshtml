@@ -1,6 +1,15 @@
 ﻿@model TARge21Shop.Models.Spaceship.SpaceshipEditViewModel
-
-<h1>Add</h1>
+@{
+    bool addUpdate;
+}
+@if (Model.Id.HasValue) {
+    <h1>Update</h1>
+    addUpdate = false;
+}
+else {
+    <h1>Add</h1>
+    addUpdate = true;
+}
 
 <div>
     <form method="post" enctype="multipart/form-data">
@@ -84,5 +93,16 @@
                 <input asp-for="BuiltDate" class="form-control" />
             </div>
         </div>
+        
+        <a asp-action="edit" asp-controller="spaceships" class="btn btn-primary">Edit</a>
+
+        @{
+            if (addUpdate == true) {
+                <input asp-action="add" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Add" />
+            }
+            else{
+                <input asp-action="Update" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Update" />
+            }
+        }
     </form>
 </div>
