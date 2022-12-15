@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TARge21Shop.ApplicationServices;
+using TARge21Shop.ApplicationServices.Services;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
 
@@ -12,7 +12,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TARge21ShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<ISpaceShipsServices, SpaceshipServices>();
+builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
+
 
 var app = builder.Build();
 

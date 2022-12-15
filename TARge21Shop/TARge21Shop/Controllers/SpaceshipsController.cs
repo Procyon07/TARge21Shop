@@ -10,13 +10,18 @@ namespace TARge21Shop.Controllers
     public class SpaceshipsController : Controller
     {
         private readonly TARge21ShopContext _context;
-        private readonly ISpaceShipsServices _spaceShipsServices;
+        private readonly ISpaceshipsServices _spaceshipsServices;
 
-        public SpaceshipsController(TARge21ShopContext context, ISpaceShipsServices spaceShipsServices)
+        public SpaceshipsController
+            (
+                TARge21ShopContext context,
+                ISpaceshipsServices spaceshipsServices
+            )
         {
             _context = context;
-            _spaceShipsServices = spaceShipsServices;
+            _spaceshipsServices = spaceshipsServices;
         }
+
 
         public IActionResult Index()
         {
@@ -33,6 +38,8 @@ namespace TARge21Shop.Controllers
 
             return View(result);
         }
+
+
         [HttpGet]
         public IActionResult Add()
         {
@@ -41,14 +48,15 @@ namespace TARge21Shop.Controllers
             return View("Edit", spaceship);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Add(SpaceshipEditViewModel vm)
         {
             var dto = new SpaceshipDto()
             {
-                Id = vm.Id, 
-                Name=vm.Name,
-                Type=vm.Type,
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
                 Crew = vm.Crew,
                 Passengers = vm.Passengers,
                 CargoWeight = vm.CargoWeight,
@@ -56,13 +64,13 @@ namespace TARge21Shop.Controllers
                 MaintenanceCount = vm.MaintenanceCount,
                 LastMaintenance = vm.LastMaintenance,
                 EnginePower = vm.EnginePower,
-                BuiltDate = vm.BuiltDate,
                 MaidenLaunch = vm.MaidenLaunch,
+                BuiltDate = vm.BuiltDate,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt,
+                ModifiedAt = vm.ModifiedAt
             };
 
-            var result = await _spaceShipsServices.Add(dto);
+            var result = await _spaceshipsServices.Add(dto);
 
             if (result == null)
             {
@@ -72,10 +80,11 @@ namespace TARge21Shop.Controllers
             return RedirectToAction(nameof(Index), vm);
         }
 
+
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var spaceship = await _spaceShipsServices.GetUpdate(id);
+            var spaceship = await _spaceshipsServices.GetUpdate(id);
 
             if (spaceship == null)
             {
@@ -94,14 +103,16 @@ namespace TARge21Shop.Controllers
                 MaintenanceCount = spaceship.MaintenanceCount,
                 LastMaintenance = spaceship.LastMaintenance,
                 EnginePower = spaceship.EnginePower,
-                BuiltDate = spaceship.BuiltDate,
                 MaidenLaunch = spaceship.MaidenLaunch,
+                BuiltDate = spaceship.BuiltDate,
                 CreatedAt = spaceship.CreatedAt,
-                ModifiedAt = spaceship.ModifiedAt,
+                ModifiedAt = spaceship.ModifiedAt
             };
 
             return View(vm);
         }
+
+
         [HttpPost]
         public async Task<IActionResult> Update(SpaceshipEditViewModel vm)
         {
@@ -117,12 +128,13 @@ namespace TARge21Shop.Controllers
                 MaintenanceCount = vm.MaintenanceCount,
                 LastMaintenance = vm.LastMaintenance,
                 EnginePower = vm.EnginePower,
-                BuiltDate = vm.BuiltDate,
                 MaidenLaunch = vm.MaidenLaunch,
+                BuiltDate = vm.BuiltDate,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt,
+                ModifiedAt = vm.ModifiedAt
             };
-            var result = await _spaceShipsServices.Update(dto);
+
+            var result = await _spaceshipsServices.Update(dto);
 
             if (result == null)
             {
@@ -131,6 +143,84 @@ namespace TARge21Shop.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         }
-        
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var spaceshipId = await _spaceshipsServices.Delete(id);
+
+            if (spaceshipId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid Id)
+        {
+            var spaceship = await _spaceshipsServices.GetAsync(Id);
+
+            if (spaceship == null)
+            {
+                         
+                return NotFound();
+            }
+
+            var vm = new SpaceshipDetailsViewModel()
+            {
+                Id = spaceship.Id,
+                Name = spaceship.Name,
+                Type = spaceship.Type,
+                Crew = spaceship.Crew,
+                Passengers = spaceship.Passengers,
+                CargoWeight = spaceship.CargoWeight,
+                FullTripsCount = spaceship.FullTripsCount,
+                MaintenanceCount = spaceship.MaintenanceCount,
+                LastMaintenance = spaceship.LastMaintenance,
+                EnginePower = spaceship.EnginePower,
+                MaidenLaunch = spaceship.MaidenLaunch,
+                BuiltDate = spaceship.BuiltDate,
+                CreatedAt = spaceship.CreatedAt,
+                ModifiedAt = spaceship.ModifiedAt
+            };           
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            var spaceship = await _spaceshipsServices.GetAsync(Id);
+
+            if (spaceship == null)
+            {
+
+                return NotFound();
+            }
+
+            var vm = new SpaceshipDeleteViewModel()
+            {
+                Id = spaceship.Id,
+                Name = spaceship.Name,
+                Type = spaceship.Type,
+                Crew = spaceship.Crew,
+                Passengers = spaceship.Passengers,
+                CargoWeight = spaceship.CargoWeight,
+                FullTripsCount = spaceship.FullTripsCount,
+                MaintenanceCount = spaceship.MaintenanceCount,
+                LastMaintenance = spaceship.LastMaintenance,
+                EnginePower = spaceship.EnginePower,
+                MaidenLaunch = spaceship.MaidenLaunch,
+                BuiltDate = spaceship.BuiltDate,
+                CreatedAt = spaceship.CreatedAt,
+                ModifiedAt = spaceship.ModifiedAt
+            };
+
+            return View(vm);
+        }
+
     }
 }

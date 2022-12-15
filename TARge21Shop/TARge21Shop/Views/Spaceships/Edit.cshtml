@@ -2,21 +2,23 @@
 @{
     bool addUpdate;
 }
-@if (Model.Id.HasValue) {
+@if (Model.Id.HasValue)
+{
     <h1>Update</h1>
     addUpdate = false;
 }
-else {
+else
+{
     <h1>Add</h1>
     addUpdate = true;
 }
 
 <div>
     <form method="post" enctype="multipart/form-data">
-        <input asp-for="Id" type="hidden"/>
+        <input asp-for="Id" type="hidden" />
         <input asp-for="CreatedAt" type="hidden" />
         <input asp-for="ModifiedAt" type="hidden" />
-        
+
         <div class="form-group row">
             <label asp-for="Name" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
@@ -93,14 +95,14 @@ else {
                 <input asp-for="BuiltDate" class="form-control" />
             </div>
         </div>
-        
-        <a asp-action="edit" asp-controller="spaceships" class="btn btn-primary">Edit</a>
 
         @{
-            if (addUpdate == true) {
+            if (addUpdate == true)
+            {
                 <input asp-action="add" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Add" />
             }
-            else{
+            else
+            {
                 <input asp-action="Update" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Update" />
             }
         }

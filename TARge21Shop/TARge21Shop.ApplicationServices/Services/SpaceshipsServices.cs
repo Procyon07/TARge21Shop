@@ -1,28 +1,28 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TARge21Shop.Data;
-using TARge21Shop;
 using TARge21Shop.Core.Domain.Spaceship;
 using TARge21Shop.Core.Dto;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TARge21Shop.Core.ServiceInterface;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.EntityFrameworkCore;
+using TARge21Shop.Data;
 
-namespace TARge21Shop.ApplicationServices
+namespace TARge21Shop.ApplicationServices.Services
 {
-
-    public class SpaceshipServices : ISpaceShipsServices
+    public class SpaceshipsServices : ISpaceshipsServices
     {
         private readonly TARge21ShopContext _context;
 
-        public SpaceshipServices(TARge21ShopContext context)
+        public SpaceshipsServices
+            (
+                TARge21ShopContext context
+            )
         {
             _context = context;
         }
+
 
         public async Task<Spaceship> Add(SpaceshipDto dto)
         {
@@ -38,8 +38,8 @@ namespace TARge21Shop.ApplicationServices
                 MaintenanceCount = dto.MaintenanceCount,
                 LastMaintenance = dto.LastMaintenance,
                 EnginePower = dto.EnginePower,
-                BuiltDate = dto.BuiltDate,
                 MaidenLaunch = dto.MaidenLaunch,
+                BuiltDate = dto.BuiltDate,
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
             };
@@ -50,12 +50,6 @@ namespace TARge21Shop.ApplicationServices
             return domain;
         }
 
-        public async Task<Spaceship> GetUpdate( Guid id)
-        {
-            var result = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
-            return result;
-        }
 
         public async Task<Spaceship> Update(SpaceshipDto dto)
         {
@@ -71,8 +65,8 @@ namespace TARge21Shop.ApplicationServices
                 MaintenanceCount = dto.MaintenanceCount,
                 LastMaintenance = dto.LastMaintenance,
                 EnginePower = dto.EnginePower,
-                BuiltDate = dto.BuiltDate,
                 MaidenLaunch = dto.MaidenLaunch,
+                BuiltDate = dto.BuiltDate,
                 CreatedAt = dto.CreatedAt,
                 ModifiedAt = DateTime.Now,
             };
@@ -82,6 +76,41 @@ namespace TARge21Shop.ApplicationServices
 
             return domain;
         }
+
+        public async Task<Spaceship> GetUpdate(Guid id)
+        {
+            var result = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
+
+        public async Task<Spaceship> Delete(Guid id)
+        {
+            var spaceshipId = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            _context.Spaceships.Remove(spaceshipId);
+            await _context.SaveChangesAsync();
+
+            return spaceshipId;
+        }
+        public async Task<Spaceship> GetAsync(Guid id)
+        {
+            var result = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
+        public async Task<Spaceship> DeleteConfirmation(Guid id)
+        {
+            var result = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
     }
 }
-
