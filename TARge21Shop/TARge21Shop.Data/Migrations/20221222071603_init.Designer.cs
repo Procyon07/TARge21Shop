@@ -12,7 +12,7 @@ using TARge21Shop.Data;
 namespace TARge21Shop.Data.Migrations
 {
     [DbContext(typeof(TARge21ShopContext))]
-    [Migration("20221215080236_init")]
+    [Migration("20221222071603_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

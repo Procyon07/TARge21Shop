@@ -1,4 +1,4 @@
-﻿@model TARge21Shop.Models.Spaceship.SpaceshipEditViewModel
+﻿@model TARge21Shop.Models.Spaceship.SpaceshipCreateUpdateViewModel
 @{
     bool addUpdate;
 }
@@ -9,7 +9,7 @@
 }
 else
 {
-    <h1>Add</h1>
+    <h1>Create</h1>
     addUpdate = true;
 }
 
@@ -99,12 +99,13 @@ else
         @{
             if (addUpdate == true)
             {
-                <input asp-action="add" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Add" />
+                <input asp-action="Create" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Create" />
             }
             else
             {
                 <input asp-action="Update" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Update" />
             }
         }
+        <a asp-action="index" class="btn btn-primary">Back</a>
     </form>
 </div>

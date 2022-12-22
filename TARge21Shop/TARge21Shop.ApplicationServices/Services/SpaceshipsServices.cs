@@ -24,7 +24,7 @@ namespace TARge21Shop.ApplicationServices.Services
         }
 
 
-        public async Task<Spaceship> Add(SpaceshipDto dto)
+        public async Task<Spaceship> Create(SpaceshipDto dto)
         {
             var domain = new Spaceship()
             {
@@ -77,7 +77,7 @@ namespace TARge21Shop.ApplicationServices.Services
             return domain;
         }
 
-        public async Task<Spaceship> GetUpdate(Guid id)
+        public async Task<Spaceship> Update(Guid id)
         {
             var result = await _context.Spaceships
                 .FirstOrDefaultAsync(x => x.Id == id);
