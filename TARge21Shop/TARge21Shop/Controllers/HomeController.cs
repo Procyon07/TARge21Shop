@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using TARge21Shop.Models;
 
+//cntrl
+
 namespace TARge21Shop.Controllers
 {
     public class HomeController : Controller
