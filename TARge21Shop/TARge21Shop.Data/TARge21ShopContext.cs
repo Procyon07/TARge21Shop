@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TARge21Shop.Core.Domain;
 
+
 namespace TARge21Shop.Data
 {
     public class TARge21ShopContext : DbContext

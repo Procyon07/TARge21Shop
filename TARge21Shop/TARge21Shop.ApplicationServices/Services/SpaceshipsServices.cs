@@ -14,14 +14,17 @@ namespace TARge21Shop.ApplicationServices.Services
     public class SpaceshipsServices : ISpaceshipsServices
     {
         private readonly TARge21ShopContext _context;
+        private readonly IFilesServices _files;
 
         public SpaceshipsServices
             (
+
                 TARge21ShopContext context
 
             )
         {
             _context = context;
+            _files = files;
         }
 
 
@@ -44,8 +47,6 @@ namespace TARge21Shop.ApplicationServices.Services
             spaceship.BuiltDate = dto.BuiltDate;
             spaceship.CreatedAt = DateTime.Now;
             spaceship.ModifiedAt = DateTime.Now;
-
-
 
             await _context.Spaceships.AddAsync(spaceship);
             await _context.SaveChangesAsync();
@@ -79,6 +80,7 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return domain;
         }
+
 
 
         public async Task<Spaceship> Delete(Guid id)

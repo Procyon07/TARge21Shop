@@ -38,7 +38,6 @@ namespace TARge21Shop.Controllers
             return View(result);
         }
 
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -46,7 +45,6 @@ namespace TARge21Shop.Controllers
 
             return View("CreateUpdate", spaceship);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(SpaceshipCreateUpdateViewModel vm)
@@ -87,11 +85,12 @@ namespace TARge21Shop.Controllers
             return RedirectToAction(nameof(Index), vm);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
+
             var spaceship = await _spaceshipsServices.GetAsync(id);
+
 
             if (spaceship == null)
             {
@@ -118,7 +117,6 @@ namespace TARge21Shop.Controllers
 
             return View("CreateUpdate", vm);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Update(SpaceshipCreateUpdateViewModel vm)
@@ -150,7 +148,6 @@ namespace TARge21Shop.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
@@ -214,6 +211,19 @@ namespace TARge21Shop.Controllers
 
             return View(vm);
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var spaceshipId = await _spaceshipsServices.Delete(id);
+
+            if (spaceshipId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
         [HttpPost]
