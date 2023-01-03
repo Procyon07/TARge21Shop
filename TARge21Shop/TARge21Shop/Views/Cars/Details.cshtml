@@ -1,0 +1,60 @@
+﻿@model TARge21Shop.Models.Car.CarDetailsViewModel
+
+<h1>Details</h1>
+
+<div>
+    <h4>Cars</h4>
+    <hr />
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Id)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Type" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Type)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Crew" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Crew)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Passengers" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Passengers)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="CargoWeight" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CargoWeight)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="FullTripsCount" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.FullTripsCount)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="MaintenanceCount" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.MaintenanceCount)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="LastMaintenance" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.LastMaintenance)
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.EnginePower)
+        </div>
+    </dl>
+    <a asp-action="Index" asp-controller="cars" class="btn btn-danger">Back</a>
+</div>
