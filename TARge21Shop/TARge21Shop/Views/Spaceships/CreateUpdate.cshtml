@@ -1,15 +1,17 @@
 ﻿@model TARge21Shop.Models.Spaceship.SpaceshipCreateUpdateViewModel
 
 
+
 @if (Model.Id.HasValue)
 {
     <h1>Update</h1>
+
 }
 else
 {
     <h1>Create</h1>
-}
 
+}
 
 <div>
     <form method="post" enctype="multipart/form-data">
@@ -65,30 +67,35 @@ else
                 <input asp-for="MaintenanceCount" class="form-control" />
             </div>
         </div>
+
         <div class="form-group row">
             <label asp-for="LastMaintenance" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
                 <input asp-for="LastMaintenance" class="form-control" />
             </div>
         </div>
+
         <div class="form-group row">
             <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
                 <input asp-for="EnginePower" class="form-control" />
             </div>
         </div>
+
         <div class="form-group row">
             <label asp-for="MaidenLaunch" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
                 <input asp-for="MaidenLaunch" class="form-control" />
             </div>
         </div>
+
         <div class="form-group row">
             <label asp-for="BuiltDate" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
                 <input asp-for="BuiltDate" class="form-control" />
             </div>
         </div>
+
         <hr />
 
         @foreach (var images in Model.Image)
@@ -111,3 +118,4 @@ else
 
     </form>
 </div>
+
