@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TARge21Shop.Core.Domain.Spaceship;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
@@ -89,7 +88,9 @@ namespace TARge21Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var spaceship = await _spaceshipsServices.Update(id);
+
+            var spaceship = await _spaceshipsServices.GetAsync(id);
+
 
             if (spaceship == null)
             {
@@ -147,15 +148,14 @@ namespace TARge21Shop.Controllers
 
             return RedirectToAction(nameof(Index), vm);
         }
-        
+
         [HttpGet]
-        public async Task<IActionResult> Details(Guid Id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            var spaceship = await _spaceshipsServices.GetAsync(Id);
+            var spaceship = await _spaceshipsServices.GetAsync(id);
 
             if (spaceship == null)
             {
-                         
                 return NotFound();
             }
 
@@ -175,19 +175,19 @@ namespace TARge21Shop.Controllers
                 BuiltDate = spaceship.BuiltDate,
                 CreatedAt = spaceship.CreatedAt,
                 ModifiedAt = spaceship.ModifiedAt
-            };           
+            };
 
             return View(vm);
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> Delete(Guid Id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var spaceship = await _spaceshipsServices.GetAsync(Id);
+            var spaceship = await _spaceshipsServices.GetAsync(id);
 
             if (spaceship == null)
             {
-
                 return NotFound();
             }
 
@@ -225,5 +225,18 @@ namespace TARge21Shop.Controllers
         }
 
 
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var spaceshipId = await _spaceshipsServices.Delete(id);
+
+            if (spaceshipId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

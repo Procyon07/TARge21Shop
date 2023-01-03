@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TARge21Shop.Core.Domain;
-using TARge21Shop.Core.Domain.Spaceship;
 using TARge21Shop.Core.Dto;
 using TARge21Shop.Core.ServiceInterface;
 using TARge21Shop.Data;
@@ -19,8 +18,9 @@ namespace TARge21Shop.ApplicationServices.Services
 
         public SpaceshipsServices
             (
-                TARge21ShopContext context,
-                IFilesServices files
+
+                TARge21ShopContext context
+
             )
         {
             _context = context;
@@ -47,11 +47,6 @@ namespace TARge21Shop.ApplicationServices.Services
             spaceship.BuiltDate = dto.BuiltDate;
             spaceship.CreatedAt = DateTime.Now;
             spaceship.ModifiedAt = DateTime.Now;
-           
-            if(dto.Files != null)
-            {
-                _files.UploadFilesToDatabase(dto, spaceship);
-            }
 
             await _context.Spaceships.AddAsync(spaceship);
             await _context.SaveChangesAsync();
@@ -86,13 +81,6 @@ namespace TARge21Shop.ApplicationServices.Services
             return domain;
         }
 
-        public async Task<Spaceship> Update(Guid id)
-        {
-            var result = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return result;
-        }
 
 
         public async Task<Spaceship> Delete(Guid id)
@@ -105,21 +93,13 @@ namespace TARge21Shop.ApplicationServices.Services
 
             return spaceshipId;
         }
+
         public async Task<Spaceship> GetAsync(Guid id)
         {
             var result = await _context.Spaceships
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            return result;
+          return result;
         }
-
-        public async Task<Spaceship> DeleteConfirmation(Guid id)
-        {
-            var result = await _context.Spaceships
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            return result;
-        }
-
     }
 }

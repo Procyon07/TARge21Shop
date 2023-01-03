@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TARge21Shop.Core.Domain;
-using TARge21Shop.Core.Domain.Spaceship;
+
 
 namespace TARge21Shop.Data
 {
