@@ -14,7 +14,6 @@ namespace TARge21Shop.ApplicationServices.Services
     public class SpaceshipsServices : ISpaceshipsServices
     {
         private readonly TARge21ShopContext _context;
-        private readonly IFilesServices _files;
 
         public SpaceshipsServices
             (
@@ -24,14 +23,12 @@ namespace TARge21Shop.ApplicationServices.Services
             )
         {
             _context = context;
-            _files = files;
         }
 
 
         public async Task<Spaceship> Create(SpaceshipDto dto)
         {
             Spaceship spaceship = new Spaceship();
-            FileToDatabase file = new FileToDatabase();
 
             spaceship.Id = Guid.NewGuid();
             spaceship.Name = dto.Name;

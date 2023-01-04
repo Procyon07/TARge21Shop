@@ -65,14 +65,6 @@ namespace TARge21Shop.Controllers
                 BuiltDate = vm.BuiltDate,
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
-                Files = vm.Files,
-                Image = vm.Image.Select(x => new FileToDatabaseDto
-                {
-                    Id = x.Id,
-                    ImageData = x.ImageData,
-                    ImageTitle = x.ImageTitle,
-                    SpaceshipId = x.SpaceshipId,
-                }).ToArray()
             };
 
             var result = await _spaceshipsServices.Create(dto);
@@ -211,21 +203,6 @@ namespace TARge21Shop.Controllers
 
             return View(vm);
         }
-        [HttpPost]
-        public async Task<IActionResult> DeleteConfirmation(Guid id)
-        {
-            var spaceshipId = await _spaceshipsServices.Delete(id);
-
-            if (spaceshipId == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
-
-
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
